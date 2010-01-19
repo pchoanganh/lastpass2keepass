@@ -1,10 +1,10 @@
 =head1 lastpassconvertor
 
-Allows you to escape the vendor lock-in of the wonderful, but closed-source lastpass service.
+Allows you to convert the LastPass export to a KeePass XML import.
 
 =head1 DESCRIPTION
 
-Allows you to simply export the contents of a lastpass export - to a format of your choice.
+Allows you to convert the LastPass export to a KeePass XML import.
 
 =head2 REQUIRES
 
