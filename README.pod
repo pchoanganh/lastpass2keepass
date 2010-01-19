@@ -23,7 +23,7 @@ Allows you to simply export the contents of a lastpass export - to a format of y
 =item * KeePassXML
 
 =back
-	
+
 =head2 USAGE
 
 =head3 LINUX
