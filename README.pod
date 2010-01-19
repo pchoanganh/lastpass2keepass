@@ -16,6 +16,14 @@ Allows you to simply export the contents of a lastpass export - to a format of y
 
 =back
 
+=head2 SUPPORTS
+
+=over
+
+=item * KeePassXML
+
+=back
+	
 =head2 USAGE
 
 =head3 LINUX
