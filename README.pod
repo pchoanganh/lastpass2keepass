@@ -1,4 +1,4 @@
-=head1 lastpassconvertor
+=head1 lastpass2keepass
 
 Allows you to convert the LastPass export to a KeePass XML import.
 
@@ -7,8 +7,6 @@ Allows you to convert the LastPass export to a KeePass XML import.
 Allows you to convert the LastPass export to a KeePass XML import.
 
 =head2 REQUIRES
-
-=head3 LINUX
 
 =over
 
@@ -26,9 +24,7 @@ Allows you to convert the LastPass export to a KeePass XML import.
 
 =head2 USAGE
 
-=head3 LINUX
-
-	python lastpassconvertor.py export keepassxml keepass.db
+	python lastpass2keepass.py export keepass.xml
 
 =head1 ACKNOWLEDGEMENTS
 
