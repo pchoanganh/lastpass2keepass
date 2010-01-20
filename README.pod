@@ -1,7 +1,3 @@
-=head1 lastpass2keepass
-
-Allows you to convert the LastPass export to a KeePass XML import.
-
 =head1 DESCRIPTION
 
 Allows you to convert the LastPass export to a KeePass XML import.
