@@ -9,7 +9,7 @@
 # The LastPass format;
 # url,username,password,1extra,name,ignore for now- grouping(\ delimited),last_touch,launch_count,fav
 
-import sys, csv, time, datetime, itertools
+import sys, csv, time, datetime, itertools, re
 from lxml import etree
 
 fileError = "You either need more permissions or the file does not exist."
@@ -76,7 +76,6 @@ def keepassxml():
             p = allEntries.index(li) + 2
             failed[p] = [",".join(li)]
             print "Failed to format entry at line %d" %(p)
-  
 
     # Initilize and loop through all entries
     for x, v in resultant.iteritems():
