@@ -127,8 +127,7 @@ def lastpass2keepassxml():
                 p = allEntries.index(entry) + 2
                 failed[p] = [",".join(entry)]
                 print "Failed to format entry at line %d" %(p)
-
-    # Check if it was a clean conversion.
+                 
     if len(failed) != 0:
         # Create a failed list.
         failedList = ["%d : %s" %(p, str(e[0]).decode("utf-8")) for p, e in failed.items()]
