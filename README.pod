@@ -6,7 +6,9 @@ Allows you to convert the LastPass export to a KeePass XML import.
 
 =over
 
-=item * Python 2.6 (sys, csv, time, datetime, lxml)
+=item * Python 2.6 (sys, csv, time, datetime, itertools, re
+
+=item * LXML
 
 =back
 
@@ -20,15 +22,15 @@ Allows you to convert the LastPass export to a KeePass XML import.
 
 =head2 USAGE
 
-	python lastpass2keepass.py export keepass.xml
-
+	python lastpassconvertor.py exportedTextFile
+	
 =head1 ACKNOWLEDGEMENTS
 
 I<Python XML processing with lxml>, I<John W. Shipman>, L<http://infohost.nmt.edu/tcc/help/pubs/pylxml/>.
 
 =head1 AVAILABILITY
 
-The latest version of pydns can be found at: L<http://github.com/nazariuskappertaal/pydns>.
+The latest version of lastpass2keepass can be found at: L<http://github.com/nazariuskappertaal/lastpass2keepass>.
 
 =head1 COPYRIGHT
 
