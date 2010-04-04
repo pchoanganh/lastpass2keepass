@@ -6,9 +6,7 @@ Allows you to convert the LastPass export to a KeePass XML import.
 
 =over
 
-=item * Python 2.6 (sys, csv, time, datetime, itertools, re
-
-=item * LXML
+=item * Python 2.6 (sys, csv, time, datetime, itertools, re, xml)
 
 =back
 
@@ -27,6 +25,7 @@ Allows you to convert the LastPass export to a KeePass XML import.
 =head1 ACKNOWLEDGEMENTS
 
 I<Python XML processing with lxml>, I<John W. Shipman>, L<http://infohost.nmt.edu/tcc/help/pubs/pylxml/>.
+I<ElementTree Overview>, I<Fredrik Lundh>, L<http://effbot.org/zone/element-index.htm>.
 
 =head1 AVAILABILITY
 

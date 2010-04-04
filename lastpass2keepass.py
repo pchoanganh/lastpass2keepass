@@ -1,17 +1,12 @@
 # LastPassConvertor
-#TODO
-# Add nested group support.
-
 # Supports:
 # Keepass XML - keepassxml
-#
 # USAGE: python lastpassconvertor.py exportedTextFile
-#
 # The LastPass Export format;
 # url,username,password,1extra,name,grouping(\ delimited),last_touch,launch_count,fav
 
-import sys, csv, time, datetime, itertools, re
-from lxml import etree
+import sys, csv, time, datetime, itertools, re # Toolkit
+import xml.etree.ElementTree as ET # Saves data, easier to type
 
 # Strings
 
@@ -22,24 +17,33 @@ def formattedPrint(string):
     print lineBreak
     print string
     print lineBreak
-    
+       
 # Files
+# Check for existence/read/write.
+
 try:
     inputFile = sys.argv[1]
 except:
     formattedPrint("USAGE: python lastpassconvertor.py exportedTextFile")
     sys.exit()
     
+try:
+	f = open(inputFile)
+except IOError:
+	formattedPrint("Cannot read file: '%s'" % (inputFile), fileError)
+	sys.exit()
+	
+# Create XML file.
 outputFile = "export.xml"
 
-# Check if we can read.
-
 try:
-    f = open(inputFile)
+    open(outputFile, "w").close() # Clean.
+    w = open(outputFile, "aw")
 except IOError:
-    formattedPrint("Cannot read file: '%s'" %(inputFile), fileError)
+    formattedPrint("Cannot write to disk... exiting.", fileError)
     sys.exit()
 
+# Parser
 # Create a csv dialect and extract the data to a reader object.
 dialect = csv.Sniffer().sniff(f.read(1024))
 f.seek(0)
@@ -57,29 +61,21 @@ allEntries.pop(0) # Remove LP format string.
 f.close() # Close the read file.
 
 # Keepass XML generator
-
-# Create XML file.
-try:
-    open(outputFile, "w").close() # Clean.
-    w = open(outputFile, "aw")
-except IOError:
-    formattedPrint("Cannot write to disk... exiting.", fileError)
-    sys.exit()
-    
-# Add doctype.
+   
+# Add doctype to head, clear file.
 w.write("<!DOCTYPE KEEPASSX_DATABASE>")
 
 # Generate Creation date
-now = datetime.datetime.now()
-
 # Form current time expression.
+now = datetime.datetime.now()
 formattedNow = now.strftime("%Y-%m-%dT%H:%M")
 
 # Initialize tree
-page = etree.Element('database')
-doc = etree.ElementTree(page)
+# build a tree structure
+page = ET.Element('database')
+doc = ET.ElementTree(page)
 
-# List of failed entries
+# Dictionary of failed entries
 failed = {}
     
 formattedPrint("DEBUG of '%s' file conversion to the KeePassXML format, outputing to the '%s' file." %(inputFile,outputFile))
@@ -88,39 +84,42 @@ formattedPrint("DEBUG of '%s' file conversion to the KeePassXML format, outputin
 resultant = {}
     
 # Parses allEntries into a resultant.
-for li in allEntries:
+for entry in allEntries:
     try:
-        categories = re.split(r"[/\\]",li[5]) # Grab final category.
+        categories = re.split(r"[/\\]",entry[5]) # Grab final category.
         for x in categories:
-            resultant.setdefault(categories.pop(), []).append(li) # Sort by categories.
+            resultant.setdefault(categories.pop(), []).append(entry) # Sort by categories.
     except:
         # Catch illformed entries         
-        # Grab entry position
-        p = allEntries.index(li) + 2
-        failed[p] = [",".join(li)]
-        print "Failed to format entry at line %d" %(p)
+        # Grab entryElement position
+        p = allEntries.index(entry) + 2
+        failed[p] = [",".join(entry)]
+        print "Failed to format entryElement at line %d" %(p)
 
 # Initilize and loop through all entries
-for x, v in resultant.iteritems():
-    headElt = etree.SubElement(page, 'group')
-    etree.SubElement(headElt, 'title').text = str(x)
-    etree.SubElement(headElt, 'icon').text = "0"
+for category, categoryEntries in resultant.iteritems():
+
+	# Create head of group elements
+    headElement = ET.SubElement(page, "group")
+    ET.SubElement(headElement, "title").text = str(category)
+    ET.SubElement(headElement, "icon").text = "0" # Lastpass does not retain icons.
     
-    for entry in v: 
-    # Entry information
+    for entry in categoryEntries: 
+    # entryElement information
         try:
-            # Each Entry
-            entryElt = etree.SubElement(headElt, 'entry')
-            etree.SubElement(entryElt, 'title').text = str(entry[4])
-            etree.SubElement(entryElt, 'username').text = str(entry[1])
-            etree.SubElement(entryElt, 'password').text = str(entry[2])
-            etree.SubElement(entryElt, 'url').text = str(entry[0])
-            etree.SubElement(entryElt, 'comment').text = str(entry[3])
-            etree.SubElement(entryElt, 'icon').text = "0"
-            etree.SubElement(entryElt, 'creation').text = formattedNow
-            etree.SubElement(entryElt, 'lastaccess').text = str(entry[6])
-            etree.SubElement(entryElt, 'lastmod').text = str(entry[7])
-            etree.SubElement(entryElt, 'expire').text = "Never"
+            # Each entryElement
+            entryElement = ET.SubElement(headElement, "entry")
+            # entryElement tree
+            ET.SubElement(entryElement, 'title').text = str(entry[4])
+            ET.SubElement(entryElement, 'username').text = str(entry[1])
+            ET.SubElement(entryElement, 'password').text = str(entry[2])
+            ET.SubElement(entryElement, 'url').text = str(entry[0])
+            ET.SubElement(entryElement, 'comment').text = str(entry[3])
+            ET.SubElement(entryElement, 'icon').text = "0"
+            ET.SubElement(entryElement, 'creation').text = formattedNow
+            ET.SubElement(entryElement, 'lastaccess').text = str(entry[6])
+            ET.SubElement(entryElement, 'lastmod').text = str(entry[7])
+            ET.SubElement(entryElement, 'expire').text = "Never"
         except:
             # Catch illformed entries          
             # Grab entry position
@@ -134,11 +133,12 @@ if len(failed) != 0:
     failedList = ["%d : %s" %(p, str(e[0]).decode("utf-8")) for p, e in failed.items()]
     formattedPrint("The conversion was not clean.")
     print "You need to manually import the below entries from the '%s' file, as listed by below." %(inputFile)
-    formattedPrint("Line Number : Entry")
+    formattedPrint("Line Number : entryElement")
     for x in failedList:
         print x
 
 # Write out tree
+# wrap it in an ElementTree instance, and save as XML
 doc.write(w)
 w.close()
 
