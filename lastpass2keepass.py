@@ -30,17 +30,17 @@ except:
 try:
 	f = open(inputFile)
 except IOError:
-	formattedPrint("Cannot read file: '%s'" % (inputFile), fileError)
+	formattedPrint("Cannot read file: '%s' Error: '%s'" % (inputFile, fileError) )
 	sys.exit()
 	
 # Create XML file.
-outputFile = "export.xml"
+outputFile = inputFile + ".export.xml"
 
 try:
     open(outputFile, "w").close() # Clean.
     w = open(outputFile, "aw")
 except IOError:
-    formattedPrint("Cannot write to disk... exiting.", fileError)
+    formattedPrint("Cannot write to disk... exiting. Error: '%s'" % (fileError) )
     sys.exit()
 
 # Parser
@@ -94,7 +94,7 @@ for entry in allEntries:
         # Grab entryElement position
         p = allEntries.index(entry) + 2
         failed[p] = [",".join(entry)]
-        print "Failed to format entryElement at line %d" %(p)
+        print "Failed to format entryElement at line %s" % (p)
 
 # Initilize and loop through all entries
 for category, categoryEntries in resultant.iteritems():
