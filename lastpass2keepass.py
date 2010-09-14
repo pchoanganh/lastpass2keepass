@@ -1,7 +1,7 @@
-# LastPassConvertor
+# lastpass2keepass
 # Supports:
 # Keepass XML - keepassxml
-# USAGE: python lastpassconvertor.py exportedTextFile
+# USAGE: python lastpass2keepass.py exportedTextFile
 # The LastPass Export format;
 # url,username,password,1extra,name,grouping(\ delimited),last_touch,launch_count,fav
 
@@ -24,7 +24,7 @@ def formattedPrint(string):
 try:
     inputFile = sys.argv[1]
 except:
-    formattedPrint("USAGE: python lastpassconvertor.py exportedTextFile")
+    formattedPrint("USAGE: python lastpass2keepass.py exportedTextFile")
     sys.exit()
     
 try:

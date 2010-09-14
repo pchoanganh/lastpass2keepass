@@ -20,7 +20,7 @@ Allows you to convert the LastPass export to a KeePass XML import.
 
 =head2 USAGE
 
-	python lastpassconvertor.py exportedTextFile
+	python lastpass2keepass.py exportedTextFile
 	
 =head1 ACKNOWLEDGEMENTS
 
