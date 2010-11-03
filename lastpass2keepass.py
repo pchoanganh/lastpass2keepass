@@ -44,10 +44,8 @@ except IOError:
     sys.exit()
 
 # Parser
-# Create a csv dialect and extract the data to a reader object.
-dialect = csv.Sniffer().sniff(f.read(1024))
-f.seek(0)
-reader = csv.reader(f, dialect)
+# Parse w/ delimter being comma, and entries separted by newlines
+reader = csv.reader(f, delimiter=',', quotechar='\n')
 
 # Create a list of the entries, allow us to manipulate it.
 # Can't be done with reader object.
@@ -56,6 +54,7 @@ allEntries = []
 
 for x in reader:
     allEntries.append(x)
+
 allEntries.pop(0) # Remove LP format string.
 
 f.close() # Close the read file.
@@ -87,6 +86,7 @@ resultant = {}
 for entry in allEntries:
     try:
         categories = re.split(r"[/\\]",entry[5]) # Grab final category.
+        
         for x in categories:
             resultant.setdefault(categories.pop(), []).append(entry) # Sort by categories.
     except:
