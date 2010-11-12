@@ -27,13 +27,7 @@ Allows you to convert the LastPass export to a KeePass XML import.
 I<Python XML processing with lxml>, I<John W. Shipman>, L<http://infohost.nmt.edu/tcc/help/pubs/pylxml/>.
 I<ElementTree Overview>, I<Fredrik Lundh>, L<http://effbot.org/zone/element-index.htm>.
 
-=head1 AVAILABILITY
-
-The latest version of lastpass2keepass can be found at: L<http://github.com/nazariuskappertaal/lastpass2keepass>.
-
 =head1 COPYRIGHT
-
-Copyright 2010, Anirudh Joshi, <L<nazariuskappertaal@gmail.com|mailto:nazariuskappertaal@gmail.com>>.
 
 This program is free software: you can redistribute it and/or modify it under 
 the terms of the GNU General Public License as published by the Free Software 
