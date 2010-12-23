@@ -94,6 +94,7 @@ for entry in allEntries:
         # Grab entryElement position
         p = allEntries.index(entry) + 2
         failed[p] = [",".join(entry)]
+        
         print "Failed to format entryElement at line %s" % (p)
 
 # Initilize and loop through all entries
