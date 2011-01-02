@@ -22,12 +22,17 @@ Allows you to convert the LastPass export to a KeePass XML import.
 
 	python lastpass2keepass.py exportedTextFile
 
+Then import the "exportedTextFile.export.xml" into KeePassx via:
+
+	File --> Import from... --> KeePassX XML (*.xml)
+
 =head2 TESTS/DEMO
 
 	python test_generator.py
 	python lastpass2keepass.py test_passwords.txt
 
 Then import the "test_passwords.txt.export.xml" into KeePassx via:
+
 	File --> Import from... --> KeePassX XML (*.xml)
 
 =head2 UTF-8
