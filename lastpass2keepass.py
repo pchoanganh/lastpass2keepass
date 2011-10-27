@@ -45,7 +45,7 @@ except IOError:
 
 # Parser
 # Parse w/ delimter being comma, and entries separted by newlines
-reader = csv.reader(f, delimiter=',', quotechar='\n')
+reader = csv.reader(f, delimiter=',', quotechar='"')
 
 # Create a list of the entries, allow us to manipulate it.
 # Can't be done with reader object.
