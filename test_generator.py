@@ -10,7 +10,7 @@ appendToFile = open("test_passwords.txt", "a" )
 
 unicode_glyphs = ''.join(
     unichr(char)
-    for char in xrange(1114112) # 0x10ffff + 1
+    for char in xrange(65533) # 0x10ffff + 1
     if unicodedata.category(unichr(char))[0] in ('LMNPSZ')
     )
 
