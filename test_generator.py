@@ -18,7 +18,7 @@ unicode_glyphs = ''.join(
 
 for i in range(1, 250):
 
-    url = "www." + "".join( [random.choice(unicode_glyphs).encode('utf-8') for i in xrange(4)]) + ".com"
+    url = "http://www." + "".join( [random.choice(unicode_glyphs).encode('utf-8') for i in xrange(4)]) + ".com"
     username = "username_" + "".join( [random.choice(unicode_glyphs).encode('utf-8') for i in xrange(4)] )
     password = "password_" + "".join( [random.choice(unicode_glyphs).encode('utf-8') for i in xrange(15)] )
     extra = "extra_" + "".join( [random.choice(unicode_glyphs).encode('utf-8') for i in xrange(4)] )
