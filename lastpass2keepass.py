@@ -38,7 +38,7 @@ outputFile = inputFile + ".export.xml"
 
 try:
     open(outputFile, "w").close() # Clean.
-    w = open(outputFile, "aw")
+    w = open(outputFile, "a")
 except IOError:
     formattedPrint("Cannot write to disk... exiting. Error: '%s'" % (fileError) )
     sys.exit()
