@@ -111,15 +111,15 @@ for category, categoryEntries in resultant.iteritems():
             # Each entryElement
             entryElement = ET.SubElement(headElement, "entry")
             # entryElement tree
-            ET.SubElement(entryElement, 'title').text = str(entry[4])
-            ET.SubElement(entryElement, 'username').text = str(entry[1])
-            ET.SubElement(entryElement, 'password').text = str(entry[2])
-            ET.SubElement(entryElement, 'url').text = str(entry[0])
-            ET.SubElement(entryElement, 'comment').text = str(entry[3])
+            ET.SubElement(entryElement, 'title').text = str(entry[4]).decode("utf-8")
+            ET.SubElement(entryElement, 'username').text = str(entry[1]).decode("utf-8")
+            ET.SubElement(entryElement, 'password').text = str(entry[2]).decode("utf-8")
+            ET.SubElement(entryElement, 'url').text = str(entry[0]).decode("utf-8")
+            ET.SubElement(entryElement, 'comment').text = str(entry[3]).decode("utf-8")
             ET.SubElement(entryElement, 'icon').text = "0"
             ET.SubElement(entryElement, 'creation').text = formattedNow
-            ET.SubElement(entryElement, 'lastaccess').text = str(entry[6])
-            ET.SubElement(entryElement, 'lastmod').text = str(entry[7])
+            ET.SubElement(entryElement, 'lastaccess').text = str(entry[6]).decode("utf-8")
+            ET.SubElement(entryElement, 'lastmod').text = str(entry[7]).decode("utf-8")
             ET.SubElement(entryElement, 'expire').text = "Never"
         except:
             # Catch illformed entries          
